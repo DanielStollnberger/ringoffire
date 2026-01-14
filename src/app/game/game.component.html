@@ -1,0 +1,8 @@
+<div class="field">
+    <div class="card-stack">
+        @for (c of [1,2,3,4]; track $index;) {
+        <img src="./../../assets/img/cards/card_cover.png" [style.right.px]='$index * 5'>
+        }
+        <img class="first-card" (click)="pickCard()" [class.pick-card]="pickCardAnimation" src="assets/img/cards/card_cover.png" [style.right.px]="25" />
+    </div>
+</div>
