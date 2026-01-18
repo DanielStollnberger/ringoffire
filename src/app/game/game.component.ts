@@ -6,12 +6,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { OpenDialogComponent } from './open-dialog/open-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { CardInfoComponent } from './card-info/card-info.component';
 
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [PlayerComponent, FormsModule, MatButtonModule, MatIconModule, OpenDialogComponent],
+  imports: [PlayerComponent, FormsModule, MatButtonModule, MatIconModule, OpenDialogComponent, CardInfoComponent],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss'
 })
