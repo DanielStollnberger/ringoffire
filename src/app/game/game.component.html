@@ -1,8 +1,23 @@
+@for (player of game.players; track $index) {
+<app-player [style.top.px]="200" class="player-position" [style.top.px]='100 + $index * 120'
+    [name]="player" [activePlayer]="$index == game.currentPlayer"></app-player>
+}
+
 <div class="field">
     <div class="card-stack">
         @for (c of [1,2,3,4]; track $index;) {
         <img src="./../../assets/img/cards/card_cover.png" [style.right.px]='$index * 5'>
         }
-        <img class="first-card" (click)="pickCard()" [class.pick-card]="pickCardAnimation" src="assets/img/cards/card_cover.png" [style.right.px]="25" />
+        <img class="first-card" (click)="pickCard()" src="assets/img/cards/card_cover.png" [style.right.px]="25" />
+        @for (c of this.game.playedCards; track $index;) {
+        <img class="pick-card" src="assets/img/cards/{{ c }}.png" [style.right.px]="25" />
+        }
+        @if (pickCardAnimation) {
+        <img class="pick-card" src="assets/img/cards/{{ currentCard }}.png" [style.right.px]="25" />
+        }
     </div>
 </div>
+
+<button mat-fab color="primary" (click)="openDialog()" class="dialog-button">
+    <mat-icon>add</mat-icon>
+</button>

@@ -1,0 +1,23 @@
+.player {
+    display: flex;
+    align-items: center;
+    border-radius: 50px 0 0 50px;
+
+    >img {
+        height: 100px;
+        width: 100px;
+        border-radius: 50px;
+    }
+
+    >span {
+        font-size: 32px;
+    }
+}
+
+.inactive{
+    background: #c0cbc0;
+}
+
+.active{
+    background: purple;
+}
