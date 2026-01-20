@@ -1,6 +1,6 @@
 @for (player of game.players; track $index) {
-<app-player [style.top.px]="200" class="player-position" [style.top.px]='100 + $index * 120'
-    [name]="player" [activePlayer]="$index == game.currentPlayer"></app-player>
+<app-player [style.top.px]="200" class="player-position" [style.top.px]='100 + $index * 120' [name]="player"
+    [activePlayer]="$index == game.currentPlayer"></app-player>
 }
 
 <div class="field">
@@ -21,5 +21,7 @@
 <button mat-fab color="primary" (click)="openDialog()" class="dialog-button">
     <mat-icon>add</mat-icon>
 </button>
-
-<app-card-info class="pin"></app-card-info>
+@if (cardInfo) {
+<app-card-info [card]="currentCard" class="pin">
+</app-card-info>
+}

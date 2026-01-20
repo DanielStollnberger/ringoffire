@@ -34,11 +34,16 @@ export class GameComponent {
   };
 
   pickCardAnimation = false;
+  cardInfo = false;
 
   pickCard() {
     this.currentCard = this.game.deck.pop();
     this.game.playedCards.push(this.currentCard);
     this.pickCardAnimation = true;
+    this.cardInfo = true;
+
+    this.game.currentPlayer++;
+    this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
 
     setTimeout(() => {
       this.pickCardAnimation = false;
