@@ -53,9 +53,11 @@ export class GameComponent {
   openDialog(): void {
     const dialogRef = this.dialog.open(OpenDialogComponent);
 
+
     dialogRef.afterClosed().subscribe(name => {
-      console.log('The dialog was closed');
+      if (name && name.length > 0) {
       this.game.players.push(name);
+      }
     });
   }
 }

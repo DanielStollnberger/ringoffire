@@ -7,6 +7,7 @@
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
+  <button matButton (click)="onNoClick()">No Thanks</button>
   <button mat-fab color="primary" [mat-dialog-close]="newPlayer" cdkFocusInitial>
     <mat-icon>add</mat-icon>
   </button>

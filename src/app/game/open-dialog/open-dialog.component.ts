@@ -10,6 +10,11 @@ import {
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { inject } from '@angular/core';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+} from '@angular/material/dialog';
 
 
 @Component({
@@ -24,11 +29,23 @@ import { FormsModule } from '@angular/forms';
     MatDialogContent,
     MatDialogActions,
     MatDialogClose,
-    FormsModule
+    FormsModule,
   ],
   templateUrl: './open-dialog.component.html',
   styleUrl: './open-dialog.component.scss'
 })
 export class OpenDialogComponent {
+  constructor() {
+  
+    }
+  
+   
+
   newPlayer: String = '';
+
+  readonly dialogRef = inject(MatDialogRef<OpenDialogComponent>);
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 }

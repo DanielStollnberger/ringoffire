@@ -70,8 +70,10 @@ export class CardInfoComponent {
   cardNmbr: number = 0;
 
   ngOnChanges(): void {
-    this.cardNmbr = +this.card?.split('_')[1]!;
+    if (this.card) {
+      this.cardNmbr = +this.card?.split('_')[1]!;
       this.title = this.cardInfo[this.cardNmbr - 1].title;
       this.description = this.cardInfo[this.cardNmbr - 1].description;
+    }
   }
 }

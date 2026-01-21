@@ -1,8 +1,8 @@
 <mat-card>
     <mat-card-header>
         <mat-card-title>
-            {{ title }}
+            {{ title ? title : 'Take card' }}
         </mat-card-title>
     </mat-card-header>
-    <mat-card-content>{{description}}</mat-card-content>
+    <mat-card-content>{{description ? description : 'click on card deck to take a card'}}</mat-card-content>
 </mat-card>
