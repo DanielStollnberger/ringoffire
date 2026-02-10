@@ -13,6 +13,6 @@ export class StartScreenComponent {
 
   }
   startGame() {
-    this.router.navigateByUrl('game/f3JxRKMaEaPcMnLU2NDo');
+    this.router.navigateByUrl('game/By7c4uj19hmsaCzPUwB2');
   }
 }

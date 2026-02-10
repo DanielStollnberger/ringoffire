@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { OpenDialogComponent } from './open-dialog/open-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { CardInfoComponent } from './card-info/card-info.component';
-import { addDoc, setDoc, Firestore, collection, onSnapshot, doc } from '@angular/fire/firestore';
+import { addDoc, setDoc, Firestore, collection, onSnapshot, doc, updateDoc } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
@@ -24,8 +24,8 @@ export class GameComponent {
   title = 'ringoffire';
   firestore: Firestore = inject(Firestore);
   game!: Game;
+  gameId: any;
   currentCard: string | undefined = '';
-
 
   constructor(private route: ActivatedRoute, public dialog: MatDialog) {
 
@@ -35,57 +35,44 @@ export class GameComponent {
 
   ngOnInit(): void {
     this.newGame();
-  
+
     this.route.params.subscribe(params => {
       const gameId = params['id'];
       this.listenToGame(gameId);
     });
+
   }
-  
+
+  async updateGame(data: any) {
+    if (this.gameId) {
+      await updateDoc(doc(this.firestore, 'games', this.gameId), data);
+    }
+  }
+
   listenToGame(gameId: string) {
-  
+
     // Alten Listener stoppen falls vorhanden
     if (this.unsubscribeGame) {
       this.unsubscribeGame();
     }
-  
+
     const gameRef = doc(this.firestore, 'games', gameId);
-  
+
     this.unsubscribeGame = onSnapshot(gameRef, (snapshot: any) => {
       const data = snapshot.data();
       if (!data) return;
-  
+
       this.game = data;
+      this.gameId = gameId;
       console.log(this.game);
     });
   }
-  
+
   ngOnDestroy(): void {
     if (this.unsubscribeGame) {
       this.unsubscribeGame();
     }
   }
-  
-
-
-  // ngOnInit(): void {
-  //   this.newGame();
-  //   this.route.params.subscribe((game) => {
-  //     console.log(game);
-  //     this.listenToGame(game);
-  //   })
-
-  // }
-
-  // listenToGame(game: any) {
-  //   onSnapshot(
-  //     doc(this.firestore, 'games/' + game['id']),
-  //     (snapshot: any) => (
-  //       this.game = snapshot.data(),
-  //       console.log(this.game)
-  //     )
-  //   )
-  // }
 
   async newGame() {
     this.game = new Game();
@@ -103,6 +90,9 @@ export class GameComponent {
 
     this.game.currentPlayer++;
     this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
+    this.updateGame({currentPlayer: this.game.currentPlayer});
+
+    this.updateGame({ playedCards: this.game.playedCards, deck: this.game.deck});
 
     setTimeout(() => {
       this.pickCardAnimation = false;
@@ -112,10 +102,10 @@ export class GameComponent {
   openDialog(): void {
     const dialogRef = this.dialog.open(OpenDialogComponent);
 
-
     dialogRef.afterClosed().subscribe(name => {
       if (name && name.length > 0) {
         this.game.players.push(name);
+        this.updateGame({players: this.game.players});
       }
     });
   }
