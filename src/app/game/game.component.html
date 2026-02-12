@@ -1,6 +1,7 @@
-@for (player of game.players; track $index) {
+@if (game) {
+@for (player of this.game.players; track $index) {
 <app-player [style.top.px]="200" class="player-position" [style.top.px]='100 + $index * 120' [name]="player"
-    [activePlayer]="$index == game.currentPlayer"></app-player>
+    [activePlayer]="$index == this.game.currentPlayer"></app-player>
 }
 
 <div class="field">
@@ -23,3 +24,4 @@
 </button>
 <app-card-info [card]="currentCard" class="pin">
 </app-card-info>
+}

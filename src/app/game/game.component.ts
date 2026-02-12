@@ -10,12 +10,13 @@ import { CardInfoComponent } from './card-info/card-info.component';
 import { addDoc, setDoc, Firestore, collection, onSnapshot, doc, updateDoc } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { StartScreenComponent } from '../start-screen/start-screen.component';
 
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [PlayerComponent, FormsModule, MatButtonModule, MatIconModule, OpenDialogComponent, CardInfoComponent],
+  imports: [PlayerComponent, FormsModule, MatButtonModule, MatIconModule, OpenDialogComponent, CardInfoComponent, StartScreenComponent],
   templateUrl: './game.component.html',
   styleUrl: './game.component.scss'
 })
@@ -34,10 +35,9 @@ export class GameComponent {
   unsubscribeGame: any;
 
   ngOnInit(): void {
-    this.newGame();
-
     this.route.params.subscribe(params => {
       const gameId = params['id'];
+      
       this.listenToGame(gameId);
     });
 
@@ -76,7 +76,6 @@ export class GameComponent {
 
   async newGame() {
     this.game = new Game();
-    // await addDoc(collection(this.firestore, 'games'), this.game.toJson());
   };
 
   pickCardAnimation = false;
@@ -90,9 +89,11 @@ export class GameComponent {
 
     this.game.currentPlayer++;
     this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
-    this.updateGame({currentPlayer: this.game.currentPlayer});
-
-    this.updateGame({ playedCards: this.game.playedCards, deck: this.game.deck});
+    this.updateGame({ 
+      playedCards: this.game.playedCards,
+      deck: this.game.deck, 
+      currentPlayer: this.game.currentPlayer
+    });
 
     setTimeout(() => {
       this.pickCardAnimation = false;

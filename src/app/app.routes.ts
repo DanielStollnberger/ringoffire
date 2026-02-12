@@ -8,7 +8,7 @@ export const routes: Routes = [
         component: StartScreenComponent
     },
     {
-        path: 'game/:id',
+        path: 'games/:id',
         component: GameComponent
     }
 ];
