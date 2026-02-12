@@ -26,7 +26,7 @@ export class GameComponent {
   firestore: Firestore = inject(Firestore);
   game!: Game;
   gameId: any;
-  currentCard: string | undefined = '';
+
 
   constructor(private route: ActivatedRoute, public dialog: MatDialog) {
 
@@ -37,10 +37,8 @@ export class GameComponent {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       const gameId = params['id'];
-      
       this.listenToGame(gameId);
     });
-
   }
 
   async updateGame(data: any) {
@@ -50,7 +48,6 @@ export class GameComponent {
   }
 
   listenToGame(gameId: string) {
-
     // Alten Listener stoppen falls vorhanden
     if (this.unsubscribeGame) {
       this.unsubscribeGame();
@@ -74,29 +71,26 @@ export class GameComponent {
     }
   }
 
-  async newGame() {
-    this.game = new Game();
-  };
-
-  pickCardAnimation = false;
-  cardInfo = false;
-
   pickCard() {
-    this.currentCard = this.game.deck.pop();
-    this.game.playedCards.push(this.currentCard);
-    this.pickCardAnimation = true;
-    this.cardInfo = true;
+    this.game.currentCard = this.game.deck.pop();
+    this.game.playedCards.push(this.game.currentCard);
+    this.game.pickCardAnimation = true;
+    this.game.cardInfo = true;
 
     this.game.currentPlayer++;
     this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
-    this.updateGame({ 
-      playedCards: this.game.playedCards,
-      deck: this.game.deck, 
-      currentPlayer: this.game.currentPlayer
-    });
+
+    this.updateGame(
+      {
+        playedCards: this.game.playedCards,
+        deck: this.game.deck,
+        currentPlayer: this.game.currentPlayer,
+        currentCard: this.game.currentCard
+      }
+    );
 
     setTimeout(() => {
-      this.pickCardAnimation = false;
+      this.game.pickCardAnimation = false;
     }, 1000);
   }
 
@@ -106,7 +100,9 @@ export class GameComponent {
     dialogRef.afterClosed().subscribe(name => {
       if (name && name.length > 0) {
         this.game.players.push(name);
-        this.updateGame({players: this.game.players});
+        this.updateGame(
+          { players: this.game.players }
+        );
       }
     });
   }

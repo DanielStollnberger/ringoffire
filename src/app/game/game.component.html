@@ -13,8 +13,8 @@
         @for (c of this.game.playedCards; track $index;) {
         <img class="pick-card" src="assets/img/cards/{{ c }}.png" [style.right.px]="25" />
         }
-        @if (pickCardAnimation) {
-        <img class="pick-card" src="assets/img/cards/{{ currentCard }}.png" [style.right.px]="25" />
+        @if (game.pickCardAnimation) {
+        <img class="pick-card" src="assets/img/cards/{{ game.currentCard }}.png" [style.right.px]="25" />
         }
     </div>
 </div>
@@ -22,6 +22,6 @@
 <button mat-fab color="primary" (click)="openDialog()" class="dialog-button">
     <mat-icon>add</mat-icon>
 </button>
-<app-card-info [card]="currentCard" class="pin">
+<app-card-info [card]="game.currentCard" class="pin">
 </app-card-info>
 }

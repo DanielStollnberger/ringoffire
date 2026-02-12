@@ -3,6 +3,10 @@ export class Game {
     currentPlayer: number = 0;
     deck: string[] = [];
     playedCards: (string | undefined)[] = [];
+    pickCardAnimation = false;
+    cardInfo = false;
+    currentCard: string | undefined = '';
+
 
     constructor() {
         for (let i = 1; i < 14; i++) {
@@ -35,7 +39,10 @@ export class Game {
             players: this.players,
             currentPlayer: this.currentPlayer,
             deck: this.deck,
-            playedCards: this.playedCards
+            playedCards: this.playedCards,
+            cardInfo: this.cardInfo,
+            pickCardAnimation: this.pickCardAnimation,
+            currentCard: this.currentCard
         }
     }
 }
