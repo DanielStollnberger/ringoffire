@@ -9,7 +9,7 @@
     align-items: center;
 }
 
-.player-position{
+.player-position {
     position: absolute;
     width: 300px;
     right: 0;
@@ -18,49 +18,95 @@
 
 .card-stack {
     position: relative;
+
     >img {
         position: absolute;
     }
 }
 
-.first-card{
+.first-card {
     cursor: pointer;
     transition: all 125ms ease-in-out;
-    &:hover{
+
+    &:hover {
         transform: scale(1.1) translateY(-10px);
     }
 }
 
-.pick-card{
+.pick-card {
     animation: pick-card-animation 1s ease-in-out;
     transform: scale(1.3) translateX(150px) translateY(-150px) rotate(30deg);
 }
 
-.dialog-button{
-        position: absolute;
-        bottom: 24px;
-        right: 24px;
+.dialog-button {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
 }
 
-.pin{
-position: absolute;
-left: 100px;
-top: 100px;
-height: 25vh;
-width: 25vw;
+.pin {
+    position: absolute;
+    left: 100px;
+    top: 100px;
+    height: 25vh;
+    width: 25vw;
 }
 
-@keyframes pick-card-animation{
-    0%{
+@keyframes pick-card-animation {
+    0% {
         transform: scale(1);
     }
-    40%{
+
+    40% {
         transform: scale(1.4);
     }
-    80%{
+
+    80% {
         transform: scale(1.7);
     }
-    100%{
-        transform: scale(1.3) translateX(150px) translateY(-150px)!important;
+
+    100% {
+        transform: scale(1.3) translateX(150px) translateY(-150px) !important;
+    }
+}
+
+@media(max-width: 400px) {
+    .card-stack {
+        top: 150px;
+    }
+
+    .pin {
+        left: 10px;
+        top: 10px;
+        height: 15vh;
+        width: 45vw;
+    }
+
+    .player-position{
+        width: 200px;
+        border-radius: 5px;
+    }
+
+    @keyframes pick-card-animation {
+        0% {
+            transform: scale(1);
+        }
+    
+        40% {
+            transform: scale(1.4);
+        }
+    
+        80% {
+            transform: scale(1.7);
+        }
+    
+        100% {
+            transform: scale(1.3) translateY(-150px)  translateX(30px)!important;
+        }
+    }
+
+    .pick-card {
+        animation: pick-card-animation 1s ease-in-out;
+        transform: scale(1.3) translateY(-250px) translateX(30px);
     }
 }

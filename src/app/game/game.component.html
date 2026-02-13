@@ -1,20 +1,20 @@
 @if (game) {
 @for (player of this.game.players; track $index) {
-<app-player [style.top.px]="200" class="player-position" [style.top.px]='100 + $index * 120' [name]="player"
+<app-player [style.top.px]="200" class="player-position" [style.top.px]='50 + $index * 120' [name]="player"
     [activePlayer]="$index == this.game.currentPlayer"></app-player>
 }
 
 <div class="field">
     <div class="card-stack">
         @for (c of [1,2,3,4]; track $index;) {
-        <img src="./../../assets/img/cards/card_cover.png" [style.right.px]='$index * 5'>
+        <img src="./../../assets/img/cards/card_cover.png" [style.right.px]='$index * 5 + 40'>
         }
-        <img class="first-card" (click)="pickCard()" src="assets/img/cards/card_cover.png" [style.right.px]="25" />
+        <img class="first-card" (click)="pickCard()" src="assets/img/cards/card_cover.png" [style.right.px]="65" />
         @for (c of this.game.playedCards; track $index;) {
-        <img class="pick-card" src="assets/img/cards/{{ c }}.png" [style.right.px]="25" />
+        <img class="pick-card" src="assets/img/cards/{{ c }}.png" [style.right.px]="65" />
         }
         @if (game.pickCardAnimation) {
-        <img class="pick-card" src="assets/img/cards/{{ game.currentCard }}.png" [style.right.px]="25" />
+        <img class="pick-card" src="assets/img/cards/{{ game.currentCard }}.png" [style.right.px]="65" />
         }
     </div>
 </div>
