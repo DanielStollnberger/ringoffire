@@ -101,12 +101,12 @@
         }
     
         100% {
-            transform: scale(1.3) translateY(-150px)  translateX(30px)!important;
+            transform: scale(1.3) translateY(-200px)  translateX(30px)!important;
         }
     }
 
     .pick-card {
         animation: pick-card-animation 1s ease-in-out;
-        transform: scale(1.3) translateY(-250px) translateX(30px);
+        transform: scale(1.3) translateY(-200px) translateX(30px);
     }
 }
